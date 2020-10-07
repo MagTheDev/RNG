@@ -6,8 +6,11 @@ dct_index = {dct_name["Dano"]: "Dano", dct_name["Jakub"]: "Jakub"}
 
 
 if str(dct_index[dct_name["Jakub"]]) == "Jakub":
-    print(f"Upadting Jakub to {}")
-    dct_name.update({"Jakub": 10})
+    dct_name.update({"Jakub": int(dct_name["Jakub"]) * float(0.76)})
+    dct_index.update({dct_name["Jakub"]: "Jakub"})
+elif str(dct_index[dct_name["Dano"]]) == "Dano":
+    dct_name.update({"Dano": int(dct_name["Dano"]) * float(0.76)})
+    dct_index.update({dct_name["Dano"]: "Dano"})
 
 wwchd = 0
 
@@ -22,5 +25,11 @@ for name in dct_name:
 def GetNameOfNum(wwchd):
     winner = dct_index[wwchd]
     print(winner)
-
 GetNameOfNum(wwchd)
+
+def AddPeople():
+    prs = input("Write the name of person you want to add: ")
+    dct_name.update({prs:random.randint(1,10000)})
+    dct_index.update({dct_name[prs]: prs})
+    print("Sucesfully added " + prs + " to catalogue")
+    

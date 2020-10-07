@@ -1,6 +1,13 @@
-dct_name = {"Dano": 3746}
-dct_index = {dct_name["Dano"]: "Dano"}
+import random
 
+
+dct_name = {"Dano": random.randint(1,10000), "Jakub": random.randint(1,10000)}
+dct_index = {dct_name["Dano"]: "Dano", dct_name["Jakub"]: "Jakub"}
+
+
+if str(dct_index[dct_name["Jakub"]]) == "Jakub":
+    print(f"Upadting Jakub to {}")
+    dct_name.update({"Jakub": 10})
 
 wwchd = 0
 

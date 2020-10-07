@@ -5,7 +5,15 @@ dct_index = {dct_name["Dano"]: "Dano"}
 wwchd = 0
 
 for name in dct_name:
-    if dct_name > wwchd:
-        wwchd = dct_name[name]
-    elif dct_name <= wwchd:
+    if int(dct_name[name]) > wwchd:
+        wwchd = int(dct_name[name])
+    elif int(dct_name[name]) <= wwchd:
         pass
+
+
+
+def GetNameOfNum(wwchd):
+    winner = dct_index[wwchd]
+    print(winner)
+
+GetNameOfNum(wwchd)

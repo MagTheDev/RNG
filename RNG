@@ -1,0 +1,11 @@
+dct_name = {"Dano": 3746}
+dct_index = {dct_name["Dano"]: "Dano"}
+
+
+wwchd = 0
+
+for name in dct_name:
+    if dct_name > wwchd:
+        wwchd = dct_name[name]
+    elif dct_name <= wwchd:
+        pass

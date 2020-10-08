@@ -1,9 +1,18 @@
 import random
 
-#sets dicts to keep track of people
+dct_name = {}
 
-dct_name = {"Dano": random.randint(1,10000), "Jakub": random.randint(1,10000)}
-dct_index = {dct_name["Dano"]: "Dano", dct_name["Jakub"]: "Jakub"}
+sfile = open("sfile.txt", "r")
+sfile_name_number = int(sfile.readline())
+
+for i in range(sfile_name_number):
+    name_get = sfile.readline().split("\n")
+    name = name_get[0]
+    number = random.randint(1, 10000)
+    dct_name.update({name:number})
+sfile.close()
+
+dct_index = {dct_name["Svitan Daniel"]: "Daniel Svitaň", dct_name["Tulek Jakub"]: "Jakub Tulek"}
 
 #lowers the score of some people
 

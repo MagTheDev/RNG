@@ -1,4 +1,4 @@
-iimport random
+import random
 
 #sets dicts to keep track of people
 
@@ -48,9 +48,3 @@ def GetNameOfNum(wwchd):
     print(winner)
 GetNameOfNum(wwchd)
 
-def AddPeople():
-    prs = input("Write the name of person you want to add: ")
-    dct_name.update({prs:random.randint(1,10000)})
-    dct_index.update({dct_name[prs]: prs})
-    print("Sucesfully added " + prs + " to catalogue")
-    

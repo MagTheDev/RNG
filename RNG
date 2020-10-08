@@ -2,49 +2,32 @@ import random
 
 #sets dicts to keep track of people
 
-dct_name = {"Dano": random.randint(1,10000), "Jakub": random.randint(1,10000)}
-dct_index = {dct_name["Dano"]: "Dano", dct_name["Jakub"]: "Jakub"}
+dct_name = {"Svitan Daniel": random.randint(1,10000), "Tulek Jakub": random.randint(1,10000)}
+people = ["Svitan Daniel", "Tulek Jakub"]
 
-#lowers the score of some people
-
-# for _ in range(1, len(dct_name)):
-#     if dct_index[dct_name["Jakub"]] == "Jakub":
-#         lower_val = dct_name["Jakub"] * 0.76
-#         dct_name.update({"Jakub":lower_val})
-#     elif dct_index[dct_name["Dano"]] == "Dano":
-#         lower_val = dct_name["Dano"] * 0.76
-
+for nme in dct_name:
+    if nme in people:
+        dct_name[nme] = dct_name.get(nme) * 0.75
+        print(dct_name[nme])
 
 wwchd = 0
 
-for name in dct_name:
-    if int(dct_name[name]) > wwchd:
-        wwchd = int(dct_name[name])
-    elif int(dct_name[name]) <= wwchd:
+for nme in dct_name:
+    if dct_name[nme] > wwchd:
+        wwchd = int(dct_name[nme])
+    elif dct_name[nme] <= wwchd:
         pass
 
 str(wwchd)
 
 
-winner = dct_index.get(wwchd)
+winner = dct_name.get(wwchd)
 print(winner)
 
 
 
-def AddPeople():
-    prs = input("Write the name of person you want to add: ")
-    dct_name.update({prs:random.randint(1,10000)})
-    dct_index.update({dct_name[prs]: prs})
-    print("Sucesfully added " + prs + " to catalogue")
-    if int(dct_name[name]) > wwchd:
-        wwchd = int(dct_name[name])
-    elif int(dct_name[name]) <= wwchd:
-        pass
-
-
-
-def GetNameOfNum(wwchd):
-    winner = dct_index[wwchd]
-    print(winner)
-GetNameOfNum(wwchd)
-
+# def AddPeople():
+#     prs = input("Write the name of person you want to add: ")
+#     dct_name.update({prs:random.randint(1,10000)})
+#     dct_index.update({dct_name[prs]: prs})
+#     print("Sucesfully added " + prs + " to catalogue")

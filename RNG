@@ -1,27 +1,32 @@
+
 import random
 
 #sets dicts to keep track of people
 
-dct_name = {"Svitan Daniel": random.randint(1,10000), "Tulek Jakub": random.randint(1,10000)}
+dct_name = {"Svitan Daniel": random.randint(1,10000), "Tulek Jakub": random.randint(1,10000), "Porubec Jakub": random.randint(1,10000) }
 people = ["Svitan Daniel", "Tulek Jakub"]
 
+#gets key of dictionary by value
+def search_by_val(dict, value):
+    for key in dict:
+        v = dict.get(key)
+        if v == value:
+            return key
+    return None
+#lowers the score of users from people
 for nme in dct_name:
     if nme in people:
-        dct_name[nme] = dct_name.get(nme) * 0.75
-        print(dct_name[nme])
-
+        dct_name[nme] = int(dct_name.get(nme) * 0.75)
 wwchd = 0
-
+#loks for user with highest score
 for nme in dct_name:
     if dct_name[nme] > wwchd:
         wwchd = int(dct_name[nme])
     elif dct_name[nme] <= wwchd:
         pass
 
-str(wwchd)
-
-
-winner = dct_name.get(wwchd)
+#gets and prints the winner
+winner = search_by_val(dict=dct_name, value=wwchd)
 print(winner)
 
 

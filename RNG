@@ -1,16 +1,19 @@
 import random
 
+#sets dicts to keep track of people
 
 dct_name = {"Dano": random.randint(1,10000), "Jakub": random.randint(1,10000)}
 dct_index = {dct_name["Dano"]: "Dano", dct_name["Jakub"]: "Jakub"}
 
+#lowers the score of some people
 
-if str(dct_index[dct_name["Jakub"]]) == "Jakub":
-    dct_name.update({"Jakub": int(dct_name["Jakub"]) * float(0.76)})
-    dct_index.update({dct_name["Jakub"]: "Jakub"})
-elif str(dct_index[dct_name["Dano"]]) == "Dano":
-    dct_name.update({"Dano": int(dct_name["Dano"]) * float(0.76)})
-    dct_index.update({dct_name["Dano"]: "Dano"})
+for _ in range(1, len(dct_name)):
+    if dct_index[dct_name["Jakub"]] == "Jakub":
+        lower_val = dct_name["Jakub"] * 0.76
+        dct_name.update({"Jakub":lower_val})
+    elif dct_index[dct_name["Dano"]] == "Dano":
+        lower_val = dct_name["Dano"] * 0.76
+
 
 wwchd = 0
 

@@ -14,20 +14,20 @@ dct_index = {dct_name["Dano"]: "Dano", dct_name["Jakub"]: "Jakub"}
 #     elif dct_index[dct_name["Dano"]] == "Dano":
 #         lower_val = dct_name["Dano"] * 0.76
 
+def Roll():
+    wwchd = 0
 
-wwchd = 0
+    for name in dct_name:
+        if int(dct_name[name]) > wwchd:
+            wwchd = int(dct_name[name])
+        elif int(dct_name[name]) <= wwchd:
+            pass
 
-for name in dct_name:
-    if int(dct_name[name]) > wwchd:
-        wwchd = int(dct_name[name])
-    elif int(dct_name[name]) <= wwchd:
-        pass
+    str(wwchd)
 
-str(wwchd)
+    winner = dct_index.get(wwchd)
+    print(winner)
 
-
-winner = dct_index.get(wwchd)
-print(winner)
 
 
 
@@ -40,11 +40,3 @@ def AddPeople():
         wwchd = int(dct_name[name])
     elif int(dct_name[name]) <= wwchd:
         pass
-
-
-
-def GetNameOfNum(wwchd):
-    winner = dct_index[wwchd]
-    print(winner)
-GetNameOfNum(wwchd)
-

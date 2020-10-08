@@ -1,4 +1,4 @@
-import random
+iimport random
 
 #sets dicts to keep track of people
 
@@ -7,17 +7,35 @@ dct_index = {dct_name["Dano"]: "Dano", dct_name["Jakub"]: "Jakub"}
 
 #lowers the score of some people
 
-for _ in range(1, len(dct_name)):
-    if dct_index[dct_name["Jakub"]] == "Jakub":
-        lower_val = dct_name["Jakub"] * 0.76
-        dct_name.update({"Jakub":lower_val})
-    elif dct_index[dct_name["Dano"]] == "Dano":
-        lower_val = dct_name["Dano"] * 0.76
+# for _ in range(1, len(dct_name)):
+#     if dct_index[dct_name["Jakub"]] == "Jakub":
+#         lower_val = dct_name["Jakub"] * 0.76
+#         dct_name.update({"Jakub":lower_val})
+#     elif dct_index[dct_name["Dano"]] == "Dano":
+#         lower_val = dct_name["Dano"] * 0.76
 
 
 wwchd = 0
 
 for name in dct_name:
+    if int(dct_name[name]) > wwchd:
+        wwchd = int(dct_name[name])
+    elif int(dct_name[name]) <= wwchd:
+        pass
+
+str(wwchd)
+
+
+winner = dct_index.get(wwchd)
+print(winner)
+
+
+
+def AddPeople():
+    prs = input("Write the name of person you want to add: ")
+    dct_name.update({prs:random.randint(1,10000)})
+    dct_index.update({dct_name[prs]: prs})
+    print("Sucesfully added " + prs + " to catalogue")
     if int(dct_name[name]) > wwchd:
         wwchd = int(dct_name[name])
     elif int(dct_name[name]) <= wwchd:

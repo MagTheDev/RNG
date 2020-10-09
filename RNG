@@ -33,7 +33,7 @@ from colorama import Fore, Style
 # "Vargovcik Matej": random.randint(1,10000), }
 dct_name = {}
 #opens and assigns keys with values from sflile.txt
-sfile = open("D:\Python\Test\T\Main\RNG", "r")
+sfile = open("D:\\Python\\Test\\T\\Main\\RNG", "r")
 sfile_name_number = int(sfile.readline())
 for i in range(sfile_name_number):
     name_get = sfile.readline().split("\n")

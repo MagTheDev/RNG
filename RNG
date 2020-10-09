@@ -1,36 +1,50 @@
-import random, time
+import random, time, sys
 from colorama import Fore, Style
 
 #sets dicts to keep track of people
 
-dct_name = {"Barborak Adam": random.randint(1,10000), 
-"Bedocs David": random.randint(1,10000), 
-"Budiacova Vladimira": random.randint(1,10000), 
-"Ferencik Tadeas": random.randint(1,10000),
-"Hodalova Mirka": random.randint(1,10000), 
-"Chmarova Laura": random.randint(1,10000), 
-"Janicek Andrej": random.randint(1,10000), 
-"Kosecka Slavka": random.randint(1,10000),
-"Hajdin Dominik": random.randint(1,10000), 
-"Kosikova Tereza": random.randint(1,10000), 
-"Kosinarova Kristina": random.randint(1,10000), 
-"Kostal Lubos": random.randint(1,10000),
-"Kruzliakova Barboba": random.randint(1,10000), 
-"Kubicova Veronika": random.randint(1,10000), 
-"Pappova Tiffany": random.randint(1,10000), 
-"Polacek Viktor": random.randint(1,10000),
-"Porubec Jakub": random.randint(1,10000), 
-"Rakus Martin": random.randint(1,10000), 
-"Sepsi Richard": random.randint(1,10000), 
-"Schuster Sofia": random.randint(1,10000),
-"Svitan Daniel": random.randint(1,10000), 
-"Stofkova Simona": random.randint(1,10000), 
-"Tomanik Oliver": random.randint(1,10000), 
-"Tomsikova Hanka": random.randint(1,10000),
-"Tothova Elena": random.randint(1,10000), 
-"Tulek Jakub": random.randint(1,10000), 
-"Vachula Tomsikova": random.randint(1,10000), 
-"Vargovcik Matej": random.randint(1,10000), }
+# dct_name = {"Barborak Adam": random.randint(1,10000), 
+# "Bedocs David": random.randint(1,10000), 
+# "Budiacova Vladimira": random.randint(1,10000), 
+# "Ferencik Tadeas": random.randint(1,10000),
+# "Hodalova Mirka": random.randint(1,10000), 
+# "Chmarova Laura": random.randint(1,10000), 
+# "Janicek Andrej": random.randint(1,10000), 
+# "Kosecka Slavka": random.randint(1,10000),
+# "Hajdin Dominik": random.randint(1,10000), 
+# "Kosikova Tereza": random.randint(1,10000), 
+# "Kosinarova Kristina": random.randint(1,10000), 
+# "Kostal Lubos": random.randint(1,10000),
+# "Kruzliakova Barboba": random.randint(1,10000), 
+# "Kubicova Veronika": random.randint(1,10000), 
+# "Pappova Tiffany": random.randint(1,10000), 
+# "Polacek Viktor": random.randint(1,10000),
+# "Porubec Jakub": random.randint(1,10000), 
+# "Rakus Martin": random.randint(1,10000), 
+# "Sepsi Richard": random.randint(1,10000), 
+# "Schuster Sofia": random.randint(1,10000),
+# "Svitan Daniel": random.randint(1,10000), 
+# "Stofkova Simona": random.randint(1,10000), 
+# "Tomanik Oliver": random.randint(1,10000), 
+# "Tomsikova Hanka": random.randint(1,10000),
+# "Tothova Elena": random.randint(1,10000), 
+# "Tulek Jakub": random.randint(1,10000), 
+# "Vachula Tomsikova": random.randint(1,10000), 
+# "Vargovcik Matej": random.randint(1,10000), }
+dct_name = {}
+#opens and assigns keys with values from sflile.txt
+sfile = open("D:\Python\Test\T\Main\RNG", "r")
+sfile_name_number = int(sfile.readline())
+for i in range(sfile_name_number):
+    name_get = sfile.readline().split("\n")
+    name = name_get[0]
+    number = random.randint(1, 10000)
+    dct_name.update({name:number})
+sfile.close()
+
+print(dct_name)
+sys.exit(0)
+
 people = ["Svitan Daniel", "Tulek Jakub"]
 
 #gets key of dictionary by value

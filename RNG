@@ -1,4 +1,4 @@
-import random, time, sys
+import random, time, sys, os
 from colorama import Fore, Style
 
 #sets dicts to keep track of people
@@ -31,54 +31,104 @@ from colorama import Fore, Style
 # "Tulek Jakub": random.randint(1,10000), 
 # "Vachula Tomsikova": random.randint(1,10000), 
 # "Vargovcik Matej": random.randint(1,10000), }
-dct_name = {}
-#opens and assigns keys with values from sflile.txt
-sfile = open("D:\\Python\\Test\\T\\Main\\RNG", "r")
-sfile_name_number = int(sfile.readline())
-for i in range(sfile_name_number):
-    name_get = sfile.readline().split("\n")
-    name = name_get[0]
-    number = random.randint(1, 10000)
-    dct_name.update({name:number})
-sfile.close()
+# dct_name = {}
+# opens and assigns keys with values from sflile.txt
+# sfile = open("D:\\Python\\Test\\T\\Main\\RNG", "r")
+# sfile_name_number = int(sfile.readline())
+# for i in range(sfile_name_number):
+#     name_get = sfile.readline().split("\n")
+#     name = name_get[0]
+#     number = random.randint(1, 10000)
+#     dct_name.update({name:number})
+# sfile.close()
 
-print(dct_name)
-sys.exit(0)
+# print(dct_name)
+# sys.exit(0)
 
-people = ["Svitan Daniel", "Tulek Jakub"]
+# people = ["Svitan Daniel", "Tulek Jakub"]
 
 #gets key of dictionary by value
-def search_by_val(dict, value):
-    for key in dict:
-        v = dict.get(key)
-        if v == value:
-            return key
-    return None
+# def search_by_val(dict, value):
+#     for key in dict:
+#         v = dict.get(key)
+#         if v == value:
+#             return key
+#     return None
 #lowers the score of users from people
-for nme in dct_name:
-    if nme in people:
-        dct_name[nme] = int(dct_name.get(nme) * 0.75)
-wwchd = 0
+# for nme in dct_name:
+#     if nme in people:
+#         dct_name[nme] = int(dct_name.get(nme) * 0.75)
+# wwchd = 0
 #loks for user with highest score
-for nme in dct_name:
-    if dct_name[nme] > wwchd:
-        wwchd = int(dct_name[nme])
-    elif dct_name[nme] <= wwchd:
-        pass
+# for nme in dct_name:
+#     if dct_name[nme] > wwchd:
+#         wwchd = int(dct_name[nme])
+#     elif dct_name[nme] <= wwchd:
+#         pass
 
 #gets and prints the winner
-winner = search_by_val(dict=dct_name, value=wwchd)
+# winner = search_by_val(dict=dct_name, value=wwchd)
 
 
 
-def AddPeople():
-    prs = input("Write the name of person you want to add: ")
-    dct_name.update({prs:random.randint(1,10000)})
-    print("Sucesfully added " + prs + " to catalogue")
+# def AddPeople():
+#     prs = input("Write the name of person you want to add: ")
+#     dct_name.update({prs:random.randint(1,10000)})
+#     print("Sucesfully added " + prs + " to catalogue")
 
 
-print("Choosing someone now")
-time.sleep(2)
-print(f"From {len(dct_name)} contestants the council has chosen {Fore.RED} {winner} {Style.RESET_ALL}")
-time.sleep(0.8)
-print(f"Good luck {Fore.RED} {winner} {Style.RESET_ALL}")
+# print("Choosing someone now")
+# time.sleep(2)
+# print(f"From {len(dct_name)} contestants the council has chosen {Fore.RED} {winner} {Style.RESET_ALL}")
+# time.sleep(0.8)
+# print(f"Good luck {Fore.RED} {winner} {Style.RESET_ALL}")
+
+class People:
+    def __init__(self, filename):
+        self.filename = filename
+        if not os.path.exists(self.filename):
+            raise FileNotFoundError()
+    
+    def read_people(self):
+        sfile = open("D:\\Python\\Test\\T\\Main\\RNG", "r")
+        sfile_name_number = int(sfile.readline())
+        for i in range(sfile_name_number):
+            name_get = sfile.readline().split("\n")
+            name = name_get[0]
+            number = random.randint(1, 10000)
+            dct_name.update({name:number})
+
+    def write_people(self):
+        pass
+
+class RNG:
+    def __init__(self, people):
+        self.people = people
+        self.names = {}
+        for person in people:
+            self.names[person] = random.randint(1,10000)
+    
+    def rig(self, person, multiplier):
+        for name in self.names:
+            if name == person:
+                self.names[name] = self.names.get(name) * multiplier
+                return
+
+    def search_by_val(self, val):
+        for n in self.names:
+            if self.names.get(n) == val:
+                return n
+        return None
+
+    def get_random_person(self):
+        wwchd = 0
+        for n in self.names:
+            if self.names.get(n) > wwchd:
+                wwchd = self.names.get(n)
+        return self.search_by_val(wwchd)
+
+def main():
+    
+
+if __name__ == "__main__":
+    main()

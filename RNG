@@ -66,3 +66,4 @@ print("Choosing someone now")
 print(f"From {len(rng.people)} contestants the council has chosen {Fore.RED} {winner} {Style.RESET_ALL}")
 
 print(f"Good luck {Fore.RED} {winner} {Style.RESET_ALL}")
+#Just to get it to 69

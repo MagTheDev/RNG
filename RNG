@@ -1,8 +1,12 @@
 import random, time, sys, os
-from colorama import Fore, Style
 
 
-people = ["Svitan Daniel", "Tomanik Oliver", "Sepsi Richard", "Tulek Jakub"]
+
+people = ["Barborak Adam", "Bedocs David", "Budiacova Vladimira", "Ferencik Tadeas", "Hajdin Dominik", "Hodalova Mirka", "Chamrova Laura",
+"Janicek Andrej", "Kosecka Slavka", "Kosikova Tereza", "Kosinarova Kristina", "Kostal Lubos", "Kruzliakova Barbora", "Kubicova Veronika", "Pappova Tiffany",
+"Polacek Viktor", "Porubec Jakub", "Rakus Martin", "Sepsi Richard", "Schuster Sofia", "Svitan Daniel", "Stofkova Simona", "Tomanik Oliver", "Tomsikova Hanka",
+"Tothova Elena", "Tulek Jakub", "Vachula Tomsikova", "Vargovcik Matej"]
+
 
 
 class RNG:
@@ -16,14 +20,12 @@ class RNG:
         for k in self.names:
             if val == self.names[k]:
                 return k
-                print(k)
 
     def get_random_person(self):
         wwchd = 0
         for n in self.names:
             if self.names.get(n) > wwchd:
                 wwchd = self.names.get(n)
-        print(wwchd)
         return self.search_by_val(wwchd)
 
     def rig(self, person, multiplier):
@@ -61,9 +63,7 @@ for name in people_to_rig:
     rng.rig(name, 0.25)
 
 winner = rng.get_random_person()
-print("Choosing someone now")
 
-print(f"From {len(rng.people)} contestants the council has chosen {Fore.RED} {winner} {Style.RESET_ALL}")
+print(f"Dnes pôjde odpovedať {winner}")
 
-print(f"Good luck {Fore.RED} {winner} {Style.RESET_ALL}")
-#Just to get it to 69
+print(f"Veľa šťastia {winner}")

@@ -1,1 +1,96 @@
+import random, sys, time
+import tkinter as tk
+from tkinter import *
 
+"""
+win = Tk()
+
+
+lf1 = LabelFrame(win, text="Ovládanie")
+lf1.pack(expand="yes", fill="y", side="left").place(x = 30,y = 50)
+
+ 
+toplabel = Label(lf1, text="You can put your happy thoughts here")  
+toplabel.pack()
+
+
+Username = Label(win, text = "Username").place(x = 30,y = 50)  
+email = Label(win, text = "Email").place(x = 30, y = 90)  
+password = Label(win, text = "Password").place(x = 30, y = 130)  
+e1 = Entry(win).place(x = 80, y = 50)  
+e2 = Entry(win).place(x = 80, y = 90)  
+e3 = Entry(top).place(x = 95, y = 130)  
+
+
+win.title('RNG')
+win.geometry("500x200")
+win.mainloop()
+
+
+"""
+
+textOut=str("")
+wwchd=0
+
+#people:number
+
+dct_name = {}
+sfile = open("sfile.txt", "r")
+sfile_name_number = int(sfile.readline())
+for i in range(sfile_name_number):
+    name_get = sfile.readline().split("\n")
+    name = name_get[0]
+    number = random.randint(1, 10000)
+    dct_name.update({name:number})
+sfile.close()
+
+people = ["Svitan Daniel", "Tulek Jakub"]
+
+#lower score for some people
+
+for guy in dct_name:
+    if guy in people:
+        dct_name[guy] = int(dct_name.get(guy) * 0.75)
+
+
+#key return function
+
+def search_by_val(dict, value):
+    for key in dict:
+        v = dict.get(key)
+        if v == value:
+            return key
+    return None
+
+
+#main definition
+
+def Roll():
+    wwchd = 0
+    for name in dct_name:
+        if int(dct_name[name]) > wwchd:
+            wwchd = int(dct_name[name])
+        elif int(dct_name[name]) <= wwchd:
+            pass
+    str(wwchd)
+    winner = search_by_val(dict=dct_name, value=wwchd)
+    textOut = "Dnes pôjde odpovedať " + winner + ", veľa štastia!"
+
+
+#bottom definitions(add people, remove people)
+
+def AddPeople():
+    name = entry1.get()
+    num = random.randint(1, 10000)
+    dct_name.update({name:num})
+
+def Exit():
+    sys.Exit(0)
+
+def RemPerson():
+    name = entry1.get()
+    dct_name.pop(name)
+
+
+
+Roll()

@@ -1,84 +1,68 @@
-import random, time, sys
+import random, time, sys, os
 from colorama import Fore, Style
 
-#sets dicts to keep track of people
 
-# dct_name = {"Barborak Adam": random.randint(1,10000), 
-# "Bedocs David": random.randint(1,10000), 
-# "Budiacova Vladimira": random.randint(1,10000), 
-# "Ferencik Tadeas": random.randint(1,10000),
-# "Hodalova Mirka": random.randint(1,10000), 
-# "Chmarova Laura": random.randint(1,10000), 
-# "Janicek Andrej": random.randint(1,10000), 
-# "Kosecka Slavka": random.randint(1,10000),
-# "Hajdin Dominik": random.randint(1,10000), 
-# "Kosikova Tereza": random.randint(1,10000), 
-# "Kosinarova Kristina": random.randint(1,10000), 
-# "Kostal Lubos": random.randint(1,10000),
-# "Kruzliakova Barboba": random.randint(1,10000), 
-# "Kubicova Veronika": random.randint(1,10000), 
-# "Pappova Tiffany": random.randint(1,10000), 
-# "Polacek Viktor": random.randint(1,10000),
-# "Porubec Jakub": random.randint(1,10000), 
-# "Rakus Martin": random.randint(1,10000), 
-# "Sepsi Richard": random.randint(1,10000), 
-# "Schuster Sofia": random.randint(1,10000),
-# "Svitan Daniel": random.randint(1,10000), 
-# "Stofkova Simona": random.randint(1,10000), 
-# "Tomanik Oliver": random.randint(1,10000), 
-# "Tomsikova Hanka": random.randint(1,10000),
-# "Tothova Elena": random.randint(1,10000), 
-# "Tulek Jakub": random.randint(1,10000), 
-# "Vachula Tomsikova": random.randint(1,10000), 
-# "Vargovcik Matej": random.randint(1,10000), }
-dct_name = {}
-#opens and assigns keys with values from sflile.txt
-sfile = open("D:\\Python\\Test\\T\\Main\\RNG", "r")
-sfile_name_number = int(sfile.readline())
-for i in range(sfile_name_number):
-    name_get = sfile.readline().split("\n")
-    name = name_get[0]
-    number = random.randint(1, 10000)
-    dct_name.update({name:number})
-sfile.close()
-
-print(dct_name)
-sys.exit(0)
-
-people = ["Svitan Daniel", "Tulek Jakub"]
-
-#gets key of dictionary by value
-def search_by_val(dict, value):
-    for key in dict:
-        v = dict.get(key)
-        if v == value:
-            return key
-    return None
-#lowers the score of users from people
-for nme in dct_name:
-    if nme in people:
-        dct_name[nme] = int(dct_name.get(nme) * 0.75)
-wwchd = 0
-#loks for user with highest score
-for nme in dct_name:
-    if dct_name[nme] > wwchd:
-        wwchd = int(dct_name[nme])
-    elif dct_name[nme] <= wwchd:
-        pass
-
-#gets and prints the winner
-winner = search_by_val(dict=dct_name, value=wwchd)
+people = ["Svitan Daniel", "Tomanik Oliver", "Sepsi Richard", "Tulek Jakub"]
 
 
+class RNG:
+    def __init__(self, people):
+        self.people = people
+        self.names = {}
+        for person in people:
+            self.names[person] = random.randint(1, 10000)
 
-def AddPeople():
-    prs = input("Write the name of person you want to add: ")
-    dct_name.update({prs:random.randint(1,10000)})
-    print("Sucesfully added " + prs + " to catalogue")
+    def search_by_val(self, val):
+        for k in self.names:
+            if val == self.names[k]:
+                return k
+                print(k)
 
+    def get_random_person(self):
+        wwchd = 0
+        for n in self.names:
+            if self.names.get(n) > wwchd:
+                wwchd = self.names.get(n)
+        print(wwchd)
+        return self.search_by_val(wwchd)
 
+    def rig(self, person, multiplier):
+        for name in self.names:
+            if name == person:
+                self.names[name] = self.names.get(name) * multiplier
+                return
+"""
+
+class People:
+    def __init__(self, filename):
+        self.filename = filename
+        if not os.path.exists(self.filename):
+            raise FileNotFoundError()
+
+    def read_people(self):
+        user_file = open("D:\\Python\\Test\\T\\Main\\RNG", "r")
+        num_of_it = int(user_file.readline())
+        for _ in range(1, num_of_it):
+            get_name = user_file.readline().split("\n")
+            print(get_name)
+
+"""
+
+def main():
+    pass
+
+if __name__ == '__main__':
+    main()
+
+rng = RNG(people)
+people_to_rig = ["Svitan Daniel"]
+
+for name in people_to_rig:
+    rng.rig(name, 0.25)
+
+winner = rng.get_random_person()
 print("Choosing someone now")
-time.sleep(2)
-print(f"From {len(dct_name)} contestants the council has chosen {Fore.RED} {winner} {Style.RESET_ALL}")
-time.sleep(0.8)
+
+print(f"From {len(rng.people)} contestants the council has chosen {Fore.RED} {winner} {Style.RESET_ALL}")
+
 print(f"Good luck {Fore.RED} {winner} {Style.RESET_ALL}")

@@ -89,7 +89,7 @@ helper = Helper(Lf1, people, people_to_rig)
 border = 0
 fg = "lightgrey"
 
-b1 = Button(win, command=helper.create_label_and_display_winner , text= "Losovať", border=border, activebackground="gray", activeforeground="white", bg=fg, height=5, width=10).place(x = 15,y = 15)
+b1 = Button(win, command=helper.create_label_and_display_winner , text= "Žrebovať", border=border, activebackground="gray", activeforeground="white", bg=fg, height=5, width=10).place(x = 15,y = 15)
 b2 = Button(win, text= "Pridať", border=border, activebackground="gray", activeforeground="white", bg=fg, height=5, width=10).place(x = 96,y = 15)
 b3 = Button(win, text= "Odobrať", border=border, activebackground="gray", activeforeground="white", bg=fg, height=5, width=10).place(x = 15,y = 101)
 b4 = Button(win, command=helper.Exit, text= "Koniec", border=border, activebackground="gray", activeforeground="white", bg=fg, height=5, width=10).place(x = 96,y = 101)

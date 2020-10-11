@@ -3,13 +3,15 @@ import tkinter as tk
 from tkinter import *
 from tkinter import simpledialog
 
-people = ["Barborak Adam", "Bedocs David", "Budiacova Vladimira", "Ferencik Tadeas", "Hajdin Dominik", "Hodalova Mirka", "Chamrova Laura",
-"Janicek Andrej", "Kosecka Slavka", "Kosikova Tereza", "Kosinarova Kristina", "Kostal Lubos", "Kruzliakova Barbora", "Kubicova Veronika", "Pappova Tiffany",
-"Polacek Viktor", "Porubec Jakub", "Rakus Martin", "Sepsi Richard", "Schuster Sofia", "Svitan Daniel", "Stofkova Simona", "Tomanik Oliver", "Tomsikova Hanka",
-"Tothova Elena", "Tulek Jakub", "Vachula Tomas", "Vargovcik Matej"]
+people = ["Barborak Adam", "Bedocs David", "Budiacova Vladimira", "Ferencik Tadeas", "Hajdin Dominik", "Hodalova Mirka",
+          "Chamrova Laura",
+          "Janicek Andrej", "Kosecka Slavka", "Kosikova Tereza", "Kosinarova Kristina", "Kostal Lubos",
+          "Kruzliakova Barbora", "Kubicova Veronika", "Pappova Tiffany",
+          "Polacek Viktor", "Porubec Jakub", "Rakus Martin", "Sepsi Richard", "Schuster Sofia", "Svitan Daniel",
+          "Stofkova Simona", "Tomanik Oliver", "Tomsikova Hanka",
+          "Tothova Elena", "Tulek Jakub", "Vachula Tomas", "Vargovcik Matej"]
 
 people_to_rig = ["Tulek Jakub", "Sepsi Richard", "Svitan Daniel", "Porubec Jakub"]
-
 
 
 class RNG:
@@ -63,8 +65,8 @@ class People:
         for string in self.people:
             if string == "":
                 self.people.pop(n)
-            n+=1
-    
+            n += 1
+
     def write_people(self):
         output_string = ""
         for person in self.people:
@@ -79,20 +81,20 @@ class People:
         self.file.close()
         self.parse_data()
         return self.people
-    
+
     def add_person(self, person_name):
         self.people.append(person_name)
-    
+
     def remove_person(self, person_name):
         self.people.remove(person_name)
-    
+
     def remove_person_at_index(self, index):
         self.people.pop(index)
 
 
 win = Tk()
 
-        
+
 class Helper:
     def __init__(self, win, filename, people_to_rig):
         try:
@@ -114,31 +116,39 @@ class Helper:
     def add(self):
         self.answer = simpledialog.askstring("Pridať žiaka", "Priezvisko Meno žiaka (iba v tomto poradí)", parent=win)
         self.rng.people_object.add_person(self.answer)
-    
+
     def Exit(self):
-        self.rng.people_object.write_people()
+        try:
+            self.rng.people_object.write_people()
+        except:
+            pass
         win.quit()
 
 
 def main():
-    Lf1 = LabelFrame(win, text = "", height=180, width=169).place(x = 10,y = 10)
-    bottomlabel = Label(Lf1, text = " ") 
+    Lf1 = LabelFrame(win, text="", height=180, width=169).place(x=10, y=10)
+    bottomlabel = Label(Lf1, text=" ")
 
-    Lf2 = LabelFrame(win, text = "", height=180, width=300).place(x = 190,y = 10) 
-    #bottomlabel = Label(Lf2, text = "test")
+    Lf2 = LabelFrame(win, text="", height=180, width=300).place(x=190, y=10)
+    # bottomlabel = Label(Lf2, text = "test")
     helper = Helper(Lf1, "people.txt", people_to_rig)
 
     border = 0
     fg = "lightgrey"
 
-    b1 = Button(win, command=helper.create_label_and_display_winner , text= "Žrebovať", border=border, activebackground="gray", activeforeground="white", bg=fg, height=5, width=10).place(x = 15,y = 15)
-    b2 = Button(win, command= helper.add, text= "Pridať", border=border, activebackground="gray", activeforeground="white", bg=fg, height=5, width=10).place(x = 96,y = 15)
-    b3 = Button(win, text= "Odobrať", border=border, activebackground="gray", activeforeground="white", bg=fg, height=5, width=10).place(x = 15,y = 101)
-    b4 = Button(win, command=helper.Exit, text= "Koniec", border=border, activebackground="gray", activeforeground="white", bg=fg, height=5, width=10).place(x = 96,y = 101)
+    b1 = Button(win, command=helper.create_label_and_display_winner, text="Žrebovať", border=border,
+                activebackground="gray", activeforeground="white", bg=fg, height=5, width=10).place(x=15, y=15)
+    b2 = Button(win, command=helper.add, text="Pridať", border=border, activebackground="gray",
+                activeforeground="white", bg=fg, height=5, width=10).place(x=96, y=15)
+    b3 = Button(win, text="Odobrať", border=border, activebackground="gray", activeforeground="white", bg=fg, height=5,
+                width=10).place(x=15, y=101)
+    b4 = Button(win, command=helper.Exit, text="Koniec", border=border, activebackground="gray",
+                activeforeground="white", bg=fg, height=5, width=10).place(x=96, y=101)
 
     win.title('Rng')
     win.geometry("500x200")
     win.mainloop()
+
 
 if __name__ == "__main__":
     main()

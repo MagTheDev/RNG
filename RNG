@@ -41,22 +41,49 @@ class RNG:
             if name == person:
                 self.names[name] = self.names.get(name) * multiplier
                 return
-"""
+
 
 class People:
     def __init__(self, filename):
         self.filename = filename
         if not os.path.exists(self.filename):
             raise FileNotFoundError()
+        self.file = open(filename, "r")
+        self.data = self.file.read()
+        self.file.close()
+        self.parse_data()
+
+    def parse_data(self):
+        self.people = []
+        people_names = self.data.split("\n")
+        for person in people_names:
+            self.people.append(person)
+        if people[-1] == "":
+            self.people.pop(-1)
+
+    def write_people(self):
+        output_string = ""
+        for person in self.people:
+            output_string += person + "\n"
+        self.file = open(self.filename, "w")
+        self.file.write(output_string)
+        self.file.close()
 
     def read_people(self):
-        user_file = open("D:\\Python\\Test\\T\\Main\\RNG", "r")
-        num_of_it = int(user_file.readline())
-        for _ in range(1, num_of_it):
-            get_name = user_file.readline().split("\n")
-            print(get_name)
+        self.file = open(self.filename, "r")
+        self.data = self.file.read()
+        self.file.close()
+        self.parse_data()
+    
+    def add_person(self, person_name):
+        self.people.append(person_name)
+    
+    def remove_person(self, person_name):
+        self.people.remove(person_name)
+    
+    def remove_person_at_index(self, index):
+        self.people.pop(index)
 
-"""
 
 win = Tk()
 
@@ -78,22 +105,25 @@ class Helper:
         win.quit()
 
 
+def main():
+    Lf1 = LabelFrame(win, text = "", height=180, width=169).place(x = 10,y = 10)
+    bottomlabel = Label(Lf1, text = " ") 
 
-Lf1 = LabelFrame(win, text = "", height=180, width=169).place(x = 10,y = 10)
-bottomlabel = Label(Lf1, text = " ") 
+    Lf2 = LabelFrame(win, text = "", height=180, width=300).place(x = 190,y = 10) 
+    #bottomlabel = Label(Lf2, text = "test")
+    helper = Helper(Lf1, people, people_to_rig)
 
-Lf2 = LabelFrame(win, text = "", height=180, width=300).place(x = 190,y = 10) 
-#bottomlabel = Label(Lf2, text = "test")
-helper = Helper(Lf1, people, people_to_rig)
+    border = 0
+    fg = "lightgrey"
 
-border = 0
-fg = "lightgrey"
+    b1 = Button(win, command=helper.create_label_and_display_winner , text= "Žrebovať", border=border, activebackground="gray", activeforeground="white", bg=fg, height=5, width=10).place(x = 15,y = 15)
+    b2 = Button(win, text= "Pridať", border=border, activebackground="gray", activeforeground="white", bg=fg, height=5, width=10).place(x = 96,y = 15)
+    b3 = Button(win, text= "Odobrať", border=border, activebackground="gray", activeforeground="white", bg=fg, height=5, width=10).place(x = 15,y = 101)
+    b4 = Button(win, command=helper.Exit, text= "Koniec", border=border, activebackground="gray", activeforeground="white", bg=fg, height=5, width=10).place(x = 96,y = 101)
 
-b1 = Button(win, command=helper.create_label_and_display_winner , text= "Žrebovať", border=border, activebackground="gray", activeforeground="white", bg=fg, height=5, width=10).place(x = 15,y = 15)
-b2 = Button(win, text= "Pridať", border=border, activebackground="gray", activeforeground="white", bg=fg, height=5, width=10).place(x = 96,y = 15)
-b3 = Button(win, text= "Odobrať", border=border, activebackground="gray", activeforeground="white", bg=fg, height=5, width=10).place(x = 15,y = 101)
-b4 = Button(win, command=helper.Exit, text= "Koniec", border=border, activebackground="gray", activeforeground="white", bg=fg, height=5, width=10).place(x = 96,y = 101)
+    win.title('Rng')
+    win.geometry("500x200")
+    win.mainloop()
 
-win.title('Rng')
-win.geometry("500x200")
-win.mainloop()
+if __name__ == "__main__":
+    main()

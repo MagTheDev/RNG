@@ -52,13 +52,6 @@ class People:
         if not os.path.exists(self.filename):
             raise FileNotFoundError()
 
-    def read_people(self):
-        user_file = open("D:\\Python\\Test\\T\\Main\\RNG", "r")
-        num_of_it = int(user_file.readline())
-        for _ in range(1, num_of_it):
-            get_name = user_file.readline().split("\n")
-            print(get_name)
-
 """
 
 win = Tk()

@@ -1,7 +1,7 @@
 import random, time, sys, os
 import tkinter as tk
 from tkinter import *
-
+from tkinter import simpledialog
 
 people = ["Barborak Adam", "Bedocs David", "Budiacova Vladimira", "Ferencik Tadeas", "Hajdin Dominik", "Hodalova Mirka", "Chamrova Laura",
 "Janicek Andrej", "Kosecka Slavka", "Kosikova Tereza", "Kosinarova Kristina", "Kostal Lubos", "Kruzliakova Barbora", "Kubicova Veronika", "Pappova Tiffany",
@@ -110,8 +110,13 @@ class Helper:
         winner = self.rng.get_random_person()
         print(winner)
         self.label1.config(text=winner)
+
+    def add(self):
+        self.answer = simpledialog.askstring("Pridať žiaka", "Priezvisko Meno žiaka (iba v tomto poradí)", parent=win)
+        self.rng.people_object.add_person(self.answer)
     
     def Exit(self):
+        self.rng.people_object.write_people()
         win.quit()
 
 
@@ -127,7 +132,7 @@ def main():
     fg = "lightgrey"
 
     b1 = Button(win, command=helper.create_label_and_display_winner , text= "Žrebovať", border=border, activebackground="gray", activeforeground="white", bg=fg, height=5, width=10).place(x = 15,y = 15)
-    b2 = Button(win, text= "Pridať", border=border, activebackground="gray", activeforeground="white", bg=fg, height=5, width=10).place(x = 96,y = 15)
+    b2 = Button(win, command= helper.add, text= "Pridať", border=border, activebackground="gray", activeforeground="white", bg=fg, height=5, width=10).place(x = 96,y = 15)
     b3 = Button(win, text= "Odobrať", border=border, activebackground="gray", activeforeground="white", bg=fg, height=5, width=10).place(x = 15,y = 101)
     b4 = Button(win, command=helper.Exit, text= "Koniec", border=border, activebackground="gray", activeforeground="white", bg=fg, height=5, width=10).place(x = 96,y = 101)
 

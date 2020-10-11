@@ -13,8 +13,9 @@ people_to_rig = ["Tulek Jakub", "Sepsi Richard", "Svitan Daniel", "Porubec Jakub
 
 
 class RNG:
-    def __init__(self, people):
-        self.people = people
+    def __init__(self, filename):
+        self.people_object = People(filename)
+        self.people = self.people_object.read_people()
         self.names = {}
         self.change_values()
 
@@ -58,9 +59,12 @@ class People:
         people_names = self.data.split("\n")
         for person in people_names:
             self.people.append(person)
-        if people[-1] == "":
-            self.people.pop(-1)
-
+        n = 0
+        for string in self.people:
+            if string == "":
+                self.people.pop(n)
+            n+=1
+    
     def write_people(self):
         output_string = ""
         for person in self.people:
@@ -74,6 +78,7 @@ class People:
         self.data = self.file.read()
         self.file.close()
         self.parse_data()
+        return self.people
     
     def add_person(self, person_name):
         self.people.append(person_name)
@@ -89,8 +94,13 @@ win = Tk()
 
         
 class Helper:
-    def __init__(self, win, people, people_to_rig):
-        self.rng = RNG(people)
+    def __init__(self, win, filename, people_to_rig):
+        try:
+            self.rng = RNG(filename)
+        except FileNotFoundError:
+            f = open(filename, "w+")
+            f.close()
+            self.rng = RNG(filename)
         self.label1 = Label(win, text="Vyberame")
         self.label1.place(x=200, y=20)
         for name in people_to_rig:
@@ -111,7 +121,7 @@ def main():
 
     Lf2 = LabelFrame(win, text = "", height=180, width=300).place(x = 190,y = 10) 
     #bottomlabel = Label(Lf2, text = "test")
-    helper = Helper(Lf1, people, people_to_rig)
+    helper = Helper(Lf1, "people.txt", people_to_rig)
 
     border = 0
     fg = "lightgrey"

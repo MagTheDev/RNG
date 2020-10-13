@@ -139,29 +139,25 @@ class Helper:
         self.label1.place(x=200, y=20)
         self.label1.pack()
         self.people_to_rig = people_to_rig
-        try:
-            self.rng = RNG(self.filename)
-        except FileNotFoundError:
-            f = open(self.filename, "w+")
-            f.close()
-            self.rng = RNG(self.filename)
-        for name in self.people_to_rig:
-            self.rng.rig(name, 0.75)
+        self.reload_rng()
 
     def create_label_and_display_winner(self):
-        try:
-            self.rng = RNG(self.filename)
-        except FileNotFoundError:
-            f = open(self.filename, "w+")
-            f.close()
-            self.rng = RNG(self.filename)
-        for name in self.people_to_rig:
-            self.rng.rig(name, 0.75)
+        self.reload_rng()
         winner = self.rng.get_random_person()
         print(winner)
         if winner == None:
             winner = "No student in database"
         self.label1.config(text=winner)
+
+    def reload_rng(self):
+        try:
+            self.rng = RNG(self.filename)
+        except FileNotFoundError:
+            f = open(self.filename, "w+")
+            f.close()
+            self.rng = RNG(self.filename)
+        for name in self.people_to_rig:
+            self.rng.rig(name, 0.75)
 
     def add(self):
         self.answer = simpledialog.askstring("Pridať žiaka", "Priezvisko Meno žiaka (iba v tomto poradí)", parent = self.root)

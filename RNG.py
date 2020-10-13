@@ -84,13 +84,18 @@ class People:
 
     def add_person(self, person_name):
         self.people.append(person_name)
+        self.write_people()
+        self.read_people()
 
     def remove_person(self, person_name):
         self.people.remove(person_name)
+        self.write_people()
+        self.read_people()
 
     def remove_person_at_index(self, index):
         self.people.pop(index)
-
+        self.write_people()
+        self.read_people()
 
 win = Tk()
 
@@ -100,17 +105,18 @@ class StudentChooser:
         self.parent = parent
 
         self.top = Toplevel(parent)
+        self.top.geometry("200x200")
 
         self.student_values = []
         self.checkbox_buttons = []
         
         for i in range(len(students)):
             self.student_values.append(IntVar())
-            self.checkbox_buttons.append(Checkbutton(self.parent, text=students[i], variable = self.student_values[i], onvalue = 1, offvalue = 0))  
+            self.checkbox_buttons.append(Checkbutton(self.top, text=students[i], variable = self.student_values[i], onvalue = 1, offvalue = 0))  
             self.checkbox_buttons[i].pack()
 
-        Label(self.top, text = "Remove").pack()
-        self.submit_button = Button(self.parent, command = self.submit)
+        self.submit_button = Button(self.top, text="Remove", command = self.submit)
+        self.submit_button.pack(side = BOTTOM)
 
     def submit(self):
         self.top.destroy()
@@ -126,26 +132,39 @@ class StudentChooser:
 
 
 class Helper:
-    def __init__(self, win, filename, people_to_rig):
-        self.win = win
-        try:
-            self.rng = RNG(filename)
-        except FileNotFoundError:
-            f = open(filename, "w+")
-            f.close()
-            self.rng = RNG(filename)
-        self.label1 = Label(self.win, text="Vyberame")
+    def __init__(self, labelframe, root, filename, people_to_rig):
+        self.root = root
+        self.filename = filename
+        self.label1 = Label(labelframe, text="Vyberame")
         self.label1.place(x=200, y=20)
-        for name in people_to_rig:
+        self.label1.pack()
+        self.people_to_rig = people_to_rig
+        try:
+            self.rng = RNG(self.filename)
+        except FileNotFoundError:
+            f = open(self.filename, "w+")
+            f.close()
+            self.rng = RNG(self.filename)
+        for name in self.people_to_rig:
             self.rng.rig(name, 0.75)
 
     def create_label_and_display_winner(self):
+        try:
+            self.rng = RNG(self.filename)
+        except FileNotFoundError:
+            f = open(self.filename, "w+")
+            f.close()
+            self.rng = RNG(self.filename)
+        for name in self.people_to_rig:
+            self.rng.rig(name, 0.75)
         winner = self.rng.get_random_person()
         print(winner)
+        if winner == None:
+            winner = "No student in database"
         self.label1.config(text=winner)
 
     def add(self):
-        self.answer = simpledialog.askstring("Pridať žiaka", "Priezvisko Meno žiaka (iba v tomto poradí)", parent=win)
+        self.answer = simpledialog.askstring("Pridať žiaka", "Priezvisko Meno žiaka (iba v tomto poradí)", parent = self.root)
         self.rng.people_object.add_person(self.answer)
 
     def exit(self): # FIXME
@@ -156,7 +175,7 @@ class Helper:
         win.quit()
 
     def remove(self):
-        dialog = StudentChooser(self.win, self.rng.people)
+        dialog = StudentChooser(self.root, self.rng.people)
         win.wait_window(dialog.top)
         people_to_remove = dialog.get_chosen_students()
         for person in people_to_remove:
@@ -169,8 +188,8 @@ def main():
 
     Lf2 = LabelFrame(win, text="", height=180, width=300)
     Lf2.place(x=190, y=10)
-    # bottomlabel = Label(Lf2, text = "test")
-    helper = Helper(Lf1, "people.txt", people_to_rig)
+
+    helper = Helper(Lf2, win, "people.txt", people_to_rig)
 
     border = 0
     fg = "lightgrey"

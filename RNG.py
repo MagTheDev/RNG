@@ -94,16 +94,47 @@ class People:
 
 win = Tk()
 
+class StudentChooser:
+    def __init__(self, parent, students):
+        self.students = students
+        self.parent = parent
+
+        self.top = Toplevel(parent)
+
+        self.student_values = []
+        self.checkbox_buttons = []
+        
+        for i in range(len(students)):
+            self.student_values.append(IntVar())
+            self.checkbox_buttons.append(Checkbutton(self.parent, text=students[i], variable = self.student_values[i], onvalue = 1, offvalue = 0))  
+            self.checkbox_buttons[i].pack()
+
+        Label(self.top, text = "Remove").pack()
+        self.submit_button = Button(self.parent, command = self.submit)
+
+    def submit(self):
+        self.top.destroy()
+    
+    def get_chosen_students(self):
+        chosen_students = []
+        n = 0
+        for i in self.student_values:
+            if i.get() == 1:
+                chosen_students.append(self.students[n])
+            n += 1
+        return chosen_students
+
 
 class Helper:
     def __init__(self, win, filename, people_to_rig):
+        self.win = win
         try:
             self.rng = RNG(filename)
         except FileNotFoundError:
             f = open(filename, "w+")
             f.close()
             self.rng = RNG(filename)
-        self.label1 = Label(win, text="Vyberame")
+        self.label1 = Label(self.win, text="Vyberame")
         self.label1.place(x=200, y=20)
         for name in people_to_rig:
             self.rng.rig(name, 0.75)
@@ -117,19 +148,27 @@ class Helper:
         self.answer = simpledialog.askstring("Pridať žiaka", "Priezvisko Meno žiaka (iba v tomto poradí)", parent=win)
         self.rng.people_object.add_person(self.answer)
 
-    def Exit(self):
+    def exit(self): # FIXME
         try:
             self.rng.people_object.write_people()
         except:
             pass
         win.quit()
 
+    def remove(self):
+        dialog = StudentChooser(self.win, self.rng.people)
+        win.wait_window(dialog.top)
+        people_to_remove = dialog.get_chosen_students()
+        for person in people_to_remove:
+            self.rng.people_object.remove_person(person)
 
 def main():
-    Lf1 = LabelFrame(win, text="", height=180, width=169).place(x=10, y=10)
+    Lf1 = LabelFrame(win, text="", height=180, width=169)
+    Lf1.place(x=10, y=10)
     bottomlabel = Label(Lf1, text=" ")
 
-    Lf2 = LabelFrame(win, text="", height=180, width=300).place(x=190, y=10)
+    Lf2 = LabelFrame(win, text="", height=180, width=300)
+    Lf2.place(x=190, y=10)
     # bottomlabel = Label(Lf2, text = "test")
     helper = Helper(Lf1, "people.txt", people_to_rig)
 
@@ -137,16 +176,21 @@ def main():
     fg = "lightgrey"
 
     b1 = Button(win, command=helper.create_label_and_display_winner, text="Žrebovať", border=border,
-                activebackground="gray", activeforeground="white", bg=fg, height=5, width=10).place(x=15, y=15)
+                activebackground="gray", activeforeground="white", bg=fg, height=5, width=10)
+    b1.place(x=15, y=15)
     b2 = Button(win, command=helper.add, text="Pridať", border=border, activebackground="gray",
-                activeforeground="white", bg=fg, height=5, width=10).place(x=96, y=15)
-    b3 = Button(win, text="Odobrať", border=border, activebackground="gray", activeforeground="white", bg=fg, height=5,
-                width=10).place(x=15, y=101)
-    b4 = Button(win, command=helper.Exit, text="Koniec", border=border, activebackground="gray",
-                activeforeground="white", bg=fg, height=5, width=10).place(x=96, y=101)
+                activeforeground="white", bg=fg, height=5, width=10)
+    b2.place(x=96, y=15)
+    b3 = Button(win, command=helper.remove, text="Odobrať", border=border, activebackground="gray", activeforeground="white", bg=fg, height=5,
+                width=10)
+    b3.place(x=15, y=101)
+    b4 = Button(win, command=helper.exit, text="Koniec", border=border, activebackground="gray",
+                activeforeground="white", bg=fg, height=5, width=10)
+    b4.place(x=96, y=101)
 
     win.title('Rng')
     win.geometry("500x200")
+    win.resizable = False
     win.mainloop()
 
 

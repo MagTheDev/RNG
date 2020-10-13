@@ -1,15 +1,6 @@
 import random, time, sys, os
 import tkinter as tk
 from tkinter import *
-from tkinter import simpledialog
-
-people = ["Barborak Adam", "Bedocs David", "Budiacova Vladimira", "Ferencik Tadeas", "Hajdin Dominik", "Hodalova Mirka",
-          "Chamrova Laura",
-          "Janicek Andrej", "Kosecka Slavka", "Kosikova Tereza", "Kosinarova Kristina", "Kostal Lubos",
-          "Kruzliakova Barbora", "Kubicova Veronika", "Pappova Tiffany",
-          "Polacek Viktor", "Porubec Jakub", "Rakus Martin", "Sepsi Richard", "Schuster Sofia", "Svitan Daniel",
-          "Stofkova Simona", "Tomanik Oliver", "Tomsikova Hanka",
-          "Tothova Elena", "Tulek Jakub", "Vachula Tomas", "Vargovcik Matej"]
 
 people_to_rig = ["Tulek Jakub", "Sepsi Richard", "Svitan Daniel", "Porubec Jakub"]
 

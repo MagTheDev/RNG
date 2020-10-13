@@ -1,6 +1,7 @@
 import random, time, sys, os
 import tkinter as tk
 from tkinter import *
+from tkinter import simpledialog
 
 people_to_rig = ["Tulek Jakub", "Sepsi Richard", "Svitan Daniel", "Porubec Jakub"]
 

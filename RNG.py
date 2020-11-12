@@ -169,6 +169,7 @@ class Helper:
         for person in people_to_remove:
             self.rng.people_object.remove_person(person)
 
+
 def main():
     Lf1 = LabelFrame(win, text="", height=180, width=169)
     Lf1.place(x=10, y=10)

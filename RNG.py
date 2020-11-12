@@ -89,9 +89,7 @@ class People:
         self.write_people()
         self.read_people()
 
-
 win = Tk()
-
 
 class StudentChooser:
     def __init__(self, parent, students):
@@ -103,19 +101,18 @@ class StudentChooser:
 
         self.student_values = []
         self.checkbox_buttons = []
-
+        
         for i in range(len(students)):
             self.student_values.append(IntVar())
-            self.checkbox_buttons.append(
-                Checkbutton(self.top, text=students[i], variable=self.student_values[i], onvalue=1, offvalue=0))
+            self.checkbox_buttons.append(Checkbutton(self.top, text=students[i], variable = self.student_values[i], onvalue = 1, offvalue = 0))  
             self.checkbox_buttons[i].pack()
 
-        self.submit_button = Button(self.top, text="Remove", command=self.submit)
-        self.submit_button.pack(side=BOTTOM)
+        self.submit_button = Button(self.top, text="Remove", command = self.submit)
+        self.submit_button.pack(side = BOTTOM)
 
     def submit(self):
         self.top.destroy()
-
+    
     def get_chosen_students(self):
         chosen_students = []
         n = 0
@@ -155,11 +152,10 @@ class Helper:
             self.rng.rig(name, 0.75)
 
     def add(self):
-        self.answer = simpledialog.askstring("Pridať žiaka", "Priezvisko Meno žiaka (iba v tomto poradí)",
-                                             parent=self.root)
+        self.answer = simpledialog.askstring("Pridať žiaka", "Priezvisko Meno žiaka (iba v tomto poradí)", parent = self.root)
         self.rng.people_object.add_person(self.answer)
 
-    def exit(self):  # FIXME
+    def exit(self): # FIXME
         try:
             self.rng.people_object.write_people()
         except:
@@ -193,8 +189,7 @@ def main():
     b2 = Button(win, command=helper.add, text="Pridať", border=border, activebackground="gray",
                 activeforeground="white", bg=fg, height=5, width=10)
     b2.place(x=96, y=15)
-    b3 = Button(win, command=helper.remove, text="Odobrať", border=border, activebackground="gray",
-                activeforeground="white", bg=fg, height=5,
+    b3 = Button(win, command=helper.remove, text="Odobrať", border=border, activebackground="gray", activeforeground="white", bg=fg, height=5,
                 width=10)
     b3.place(x=15, y=101)
     b4 = Button(win, command=helper.exit, text="Koniec", border=border, activebackground="gray",

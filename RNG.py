@@ -4,7 +4,7 @@ from tkinter import *
 from tkinter import simpledialog
 
 people_to_rig = ["Tulek Jakub", "Sepsi Richard", "Svitan Daniel", "Porubec Jakub"]
-
+version = "1.0"
 
 class RNG:
     def __init__(self, filename):
@@ -203,4 +203,7 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    if "-version" in sys.argv:
+        print(version, end = "")
+    else:
+        main()
